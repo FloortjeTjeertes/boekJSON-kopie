@@ -1,0 +1,17 @@
+.boekselectie__cover{
+  max-width: 100px;
+}
+ .boekselectie__rij:nth-child(even){
+  background-color: #def;
+}
+.boekselectie__data-cel{
+  padding: 1em;
+  vertical-align:top;
+}
+.boekselectie__data-cel:nth-child(3){
+  padding: 0;
+}
+
+.boekselectie__data-cel:nth-child(3){
+  padding: 0;
+}

@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="dutch" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="author" content="Florian Tjeertes">
-    <meta name="viewport" content="width-device-width ,initial-scale=1">
-    <title>Sorteer boeken</title>
-  </head>
-  <body lang="nl">
-    <h1>Een selectie van boeken</h1>
-   <div id="uitvoer"></div>
-   <script src="sorteerBoeken.js" charset="utf-8"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Florian Tjeertes">
+  <meta name="viewport" content="width-device-width ,initial-scale=1">
+  <title>Sorteer boeken</title>
+  <link rel="stylesheet" href="sorteerJSONstijl.css">
+</head>
+
+<body lang="nl">
+  <h1>Een selectie van boeken</h1>
+  <select id="kenmerk">
+    <option value="titel">titel</option>
+    <option value="auteur">auteur</option>
+    <option value="uitgaven">datum van uitgaven</option>
+    <option value="paginas">aantal bladzijden</option>
+    <option value="taal">taal</option>
+  </select>
+
+  <div id="uitvoer"></div>
+  <script src="sorteerBoeken.js" charset="utf-8"></script>
+</body>
+
 </html>

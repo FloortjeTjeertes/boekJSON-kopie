@@ -13,6 +13,8 @@ xmlhttp.open('GET', "boeken.json", true);
 xmlhttp.send();
 
 
+
+
 const maakTabelKop = (arr) => {
 let kop = "<table><tr>";
 arr.forEach((item) =>{
@@ -23,7 +25,7 @@ return kop;
 }
 
 const maakTabelRij = (arr) => {
-let kop = "<tr>";
+let rij = "<tr>";
 arr.forEach((item) =>{
   rij += "<td>" + item + "</td>"
 });
@@ -40,13 +42,14 @@ let sorteerBoekObj =  {
 
   sorteren: function(){
     this.data.sort( (a,b) => a.titel > b.titel ? 1 : -1);
-    this.uitvoeren();
+    this.uitvoeren(this.data);
   },
 
   uitvoeren: function(data){
     let uitvoer = maakTabelKop(["titel", "auter(s)", "cover", "uitgave","bladzijden", "taal","EAN"]);
     for(let i=0; i<data.length; i++){
-      uitvoer += data[i].titel +"<br>";
+      let imgElement ="<img src='" + data[i].cover + "' width=100 alt='"+ data[i].titel +"'>";
+      uitvoer += maakTabelRij([data[i].titel, data[i].titel, imgElement ,data[i].uitgave,data[i].paginas,data[i].taal,data[i].ean])
     }
     document.getElementById('uitvoer').innerHTML = uitvoer;
 

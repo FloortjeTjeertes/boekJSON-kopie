@@ -14,6 +14,7 @@ xmlhttp.onreadystatechange = function() {
     console.log("readyState:" + this.readyState);
     console.log("status:" + this.status);
     sorteerBoekObj.data = JSON.parse(this.responseText);
+    sorteerBoekObj.voegJSdatumIn();
     sorteerBoekObj.sorteren();
   }
 
@@ -89,7 +90,8 @@ const geefMaandNummer = (maand) => {
 
 const maakJSdatum = (maandJaar) => {
   let mjArray = maandJaar.split(" ");
-  return mjArray;
+  let datum = new Date(mjArray[1], geefMaandNummer(mjArray[0]));
+  return datum;
 }
 
 
@@ -97,6 +99,12 @@ let sorteerBoekObj = {
   data: "",
 
   kenmerk: "titel",
+voegJSdatumIn: function(){
+   this.data.forEach((item) =>{
+     item.JSdatum = maakJSdatum(item.uitgaven);
+   });
+
+},
 
   sorteren: function() {
     this.data.sort((a, b) => a[this.kenmerk] > b[this.kenmerk] ? 1 : -1);

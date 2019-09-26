@@ -44,19 +44,29 @@ const maakTabelRij = (arr) => {
 const geefMaandNummer = (maand) => {
   let nummer;
   switch (maand) {
-    case "januari": 0;
-
-      break;
-    default:
+    case "januari": nummer = 0;break;
+    case "februari": nummer = 1;break;
+    case "maart": nummer = 2;break;
+    case "april": nummer = 3;break;
+    case "mei": nummer = 4;break;
+    case "junie": nummer = 5;break;
+    case "julie": nummer = 6;break;
+    case "augustus": nummer = 7;break;
+    case "september": nummer = 8;break;
+    case "oktober": nummer = 9;break;
+    case "november": nummer = 10;break;
+    case "december": nummer = 11;break;
+    default:nummer = 0
 
   }
+  return nummer;
 }
 
 const maakJSdatum = (maandJaar) => {
   let mjArray = maandJaar.split(" ");
 return mjArray;
 }
- 
+
 
 let sorteerBoekObj = {
   data: "",

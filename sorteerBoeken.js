@@ -56,7 +56,7 @@ const maakJSdatum = (maandJaar) => {
   let mjArray = maandJaar.split(" ");
 return mjArray;
 }
-
+ 
 
 let sorteerBoekObj = {
   data: "",

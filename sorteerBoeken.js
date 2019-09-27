@@ -45,7 +45,7 @@ const maakTabelRij = (arr) => {
 
 
 
-const geefMaandNummer = (maandJaar) => {
+const geefMaandNummer = (maand) => {
   let nummer;
   switch (maand) {
     case "januari":
@@ -91,10 +91,26 @@ const geefMaandNummer = (maandJaar) => {
   return nummer;
 }
 
+
 const maakJSdatum = (maandJaar) => {
   let mjArray = maandJaar.split(" ");
   let datum = new Date(mjArray[1], geefMaandNummer(mjArray[0]));
   return datum;
+}
+
+const maakOpsomming = (array) =>{
+  let string = "";
+  for (let i = 0; i < array.length; i++) {
+    switch (i) {
+      case array.length-1: string +=[i];
+      case array.length-2: string +=[i] +"en";
+
+        break;
+      default:string +=[i] +",";
+
+    }
+  }
+ return  string;
 }
 
 
@@ -104,8 +120,8 @@ let sorteerBoekObj = {
   kenmerk: "titel",
 voegJSdatumIn: function(){
    this.data.forEach((item) =>{
-     item.JSdatum = maakJSdatum(item.uitgaven);
-   });
+     item.jsDatum = maakJSdatum(item.uitgave);
+   })
 
 },
 
@@ -143,3 +159,8 @@ voegJSdatumIn: function(){
 
   }
 }
+
+document.getElementById('kenmerk').addEventListener('change', (e) =>{
+  sorteerBoekObj.kenmerk = e.target.value;
+  sorteerBoekObj.sorteren();
+});

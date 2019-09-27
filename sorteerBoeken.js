@@ -42,7 +42,10 @@ const maakTabelRij = (arr) => {
   rij += "</tr>";
   return rij;
 }
-const geefMaandNummer = (maand) => {
+
+
+
+const geefMaandNummer = (maandJaar) => {
   let nummer;
   switch (maand) {
     case "januari":

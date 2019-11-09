@@ -100,13 +100,11 @@ const maakJSdatum = (maandJaar) => {
 
 const maakOpsomming = (array) =>{
   let string = "";
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 0; i<array.length; i++) {
     switch (i) {
-      case array.length-1: string +=[i];
-      case array.length-2: string +=[i] +"en";
-
-        break;
-      default:string +=[i] +",";
+      case array.length-1 : string +=array[i]; break
+      case array.length-2 : string +=array[i] +" en "; break;
+      default: string += array[i] +", ";
 
     }
   }
@@ -118,6 +116,9 @@ let sorteerBoekObj = {
   data: "",
 
   kenmerk: "titel",
+
+oplopend:1,
+
 voegJSdatumIn: function(){
    this.data.forEach((item) =>{
      item.jsDatum = maakJSdatum(item.uitgave);
@@ -126,13 +127,13 @@ voegJSdatumIn: function(){
 },
 
   sorteren: function() {
-    this.data.sort((a, b) => a[this.kenmerk] > b[this.kenmerk] ? 1 : -1);
+    this.data.sort((a, b) => a[this.kenmerk] > b[this.kenmerk] ? 1*this.oplopend : -1*this.oplopend);
     this.uitvoeren(this.data);
   },
 
   uitvoeren: function(data) {
     let uitvoer = maakTabelKop(["titel",
-      "auter(s)",
+      "auteur(s)",
       "cover",
       "uitgave",
       "bladzijden",
@@ -145,9 +146,12 @@ voegJSdatumIn: function(){
         "' class='boekselectie__cover' alt='" +
         data[i].titel +
         "'>";
+
+      let auteurs = maakOpsomming(data[i].auteur);
+
       uitvoer += maakTabelRij(
         [data[i].titel,
-          data[i].auteur[0],
+          auteurs,
           imgElement,
           data[i].uitgave,
           data[i].paginas,
@@ -164,3 +168,9 @@ document.getElementById('kenmerk').addEventListener('change', (e) =>{
   sorteerBoekObj.kenmerk = e.target.value;
   sorteerBoekObj.sorteren();
 });
+document.getElementsByName('oplopend').forEach((item) =>{
+item.addEventListener('click', (e)=> {
+sorteerBoekObj.oplopend = parseInt(e.target.value);
+sorteerBoekObj.sorteren();
+})
+})

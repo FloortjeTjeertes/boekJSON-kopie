@@ -15,6 +15,10 @@ xmlhttp.onreadystatechange = function() {
     console.log("status:" + this.status);
     sorteerBoekObj.data = JSON.parse(this.responseText);
     sorteerBoekObj.voegJSdatumIn();
+
+    sorteerBoekObj.data.forEach(boek => {
+      boek.titelUpper = boek.titel.toUpperCase();
+    });
     sorteerBoekObj.sorteren();
   }
 
@@ -110,11 +114,11 @@ const maakOpsomming = (array) => {
 
 
 const keerTekstOm = (string) => {
-  if(string.indexOf(',') != -1){
-let array = string.split(',');
-string = array[1] + ' '+array[0];
-}
-return string;
+  if (string.indexOf(',') != -1) {
+    let array = string.split(',');
+    string = array[1] + ' ' + array[0];
+  }
+  return string;
 }
 
 
@@ -127,7 +131,7 @@ return string;
 let sorteerBoekObj = {
   data: "",
 
-  kenmerk: "titel",
+  kenmerk: "titelUpper",
 
   oplopend: 1,
 

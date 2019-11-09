@@ -132,7 +132,13 @@ afbeelding.className = 'boekselectie__cover';
 afbeelding.setAttribute('src',boek.cover);
 afbeelding.setAttribute('alt',boek.titel);
 
+let titel = document.createElement('h3');
+titel.className = 'boek__titel';
+titel.textContent = boek.titel;
+
+
 sectie.appendChild(afbeelding);
+sectie.appendChild(titel);
 document.getElementById('uitvoer').appendChild(sectie);
 });
 

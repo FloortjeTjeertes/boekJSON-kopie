@@ -109,6 +109,21 @@ const maakOpsomming = (array) => {
 }
 
 
+const keerTekstOm = (string) => {
+  if(string.indexOf(',') != -1){
+let array = string.split(',');
+string = array[1] + ' '+array[0];
+}
+return string;
+}
+
+
+
+
+
+
+
+
 let sorteerBoekObj = {
   data: "",
 
@@ -141,11 +156,11 @@ let sorteerBoekObj = {
       let afbeelding = document.createElement('img');
       afbeelding.className = 'boekselectie__cover';
       afbeelding.setAttribute('src', boek.cover);
-      afbeelding.setAttribute('alt', boek.titel);
+      afbeelding.setAttribute('alt', keerTekstOm(boek.titel));
 
       let titel = document.createElement('h3');
       titel.className = 'boekSelectie__titel';
-      titel.textContent = boek.titel;
+      titel.textContent = keerTekstOm(boek.titel);
 
       let prijs = document.createElement('div');
       prijs.className = 'boekSelectie__prijs';

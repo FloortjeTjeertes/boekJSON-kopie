@@ -34,14 +34,6 @@ const maakTabelKop = (arr) => {
   return kop;
 }
 
-const maakTabelRij = (arr) => {
-  let rij = "<tr class='boekselectie__rij'>";
-  arr.forEach((item) => {
-    rij += "<td class='boekselectie__data-cel'>" + item + "</td>"
-  });
-  rij += "</tr>";
-  return rij;
-}
 
 
 
@@ -130,36 +122,20 @@ voegJSdatumIn: function(){
     this.data.sort((a, b) => a[this.kenmerk] > b[this.kenmerk] ? 1*this.oplopend : -1*this.oplopend);
     this.uitvoeren(this.data);
   },
-
   uitvoeren: function(data) {
-    let uitvoer = maakTabelKop(["titel",
-      "auteur(s)",
-      "cover",
-      "uitgave",
-      "bladzijden",
-      "taal",
-      "EAN"
-    ]);
-    for (let i = 0; i < data.length; i++) {
-      let imgElement = "<img src='" +
-        data[i].cover +
-        "' class='boekselectie__cover' alt='" +
-        data[i].titel +
-        "'>";
+    data.forEach(boek=>{
+      let sectie = document.createElement('section');
+sectie.className ='boek';
 
-      let auteurs = maakOpsomming(data[i].auteur);
+let afbeelding = document.createElement('img');
+afbeelding.className = 'boekselectie__cover';
+afbeelding.setAttribute('src',boek.cover);
+afbeelding.setAttribute('alt',boek.titel);
 
-      uitvoer += maakTabelRij(
-        [data[i].titel,
-          auteurs,
-          imgElement,
-          data[i].uitgave,
-          data[i].paginas,
-          data[i].taal,
-          data[i].ean
-        ])
-    }
-    document.getElementById('uitvoer').innerHTML = uitvoer;
+sectie.appendChild(afbeelding);
+document.getElementById('uitvoer').appendChild(sectie);
+});
+
 
   }
 }

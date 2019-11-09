@@ -90,17 +90,22 @@ const maakJSdatum = (maandJaar) => {
   return datum;
 }
 
-const maakOpsomming = (array) =>{
+const maakOpsomming = (array) => {
   let string = "";
-  for (let i = 0; i<array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     switch (i) {
-      case array.length-1 : string +=array[i]; break
-      case array.length-2 : string +=array[i] +" en "; break;
-      default: string += array[i] +", ";
+      case array.length - 1:
+        string += array[i];
+        break
+      case array.length - 2:
+        string += array[i] + " en ";
+        break;
+      default:
+        string += array[i] + ", ";
 
     }
   }
- return  string;
+  return string;
 }
 
 
@@ -109,50 +114,61 @@ let sorteerBoekObj = {
 
   kenmerk: "titel",
 
-oplopend:1,
+  oplopend: 1,
 
-voegJSdatumIn: function(){
-   this.data.forEach((item) =>{
-     item.jsDatum = maakJSdatum(item.uitgave);
-   })
+  voegJSdatumIn: function() {
+    this.data.forEach((item) => {
+      item.jsDatum = maakJSdatum(item.uitgave);
+    })
 
-},
+  },
 
   sorteren: function() {
-    this.data.sort((a, b) => a[this.kenmerk] > b[this.kenmerk] ? 1*this.oplopend : -1*this.oplopend);
+    this.data.sort((a, b) => a[this.kenmerk] > b[this.kenmerk] ? 1 * this.oplopend : -1 * this.oplopend);
     this.uitvoeren(this.data);
   },
   uitvoeren: function(data) {
-    data.forEach(boek=>{
+    document.getElementById('uitvoer').innerHTML = "";
+
+    data.forEach(boek => {
       let sectie = document.createElement('section');
-sectie.className ='boek';
+      sectie.className = 'boekSelectie';
 
-let afbeelding = document.createElement('img');
-afbeelding.className = 'boekselectie__cover';
-afbeelding.setAttribute('src',boek.cover);
-afbeelding.setAttribute('alt',boek.titel);
-
-let titel = document.createElement('h3');
-titel.className = 'boek__titel';
-titel.textContent = boek.titel;
+      let main = document.createElement('main');
+      main.className = 'boekSelectie__main';
 
 
-sectie.appendChild(afbeelding);
-sectie.appendChild(titel);
-document.getElementById('uitvoer').appendChild(sectie);
-});
+      let afbeelding = document.createElement('img');
+      afbeelding.className = 'boekselectie__cover';
+      afbeelding.setAttribute('src', boek.cover);
+      afbeelding.setAttribute('alt', boek.titel);
+
+      let titel = document.createElement('h3');
+      titel.className = 'boekSelectie__titel';
+      titel.textContent = boek.titel;
+
+      let prijs = document.createElement('div');
+      prijs.className = 'boekSelectie__prijs';
+      prijs.textContent = '€ ' + boek.prijs;
+
+      sectie.appendChild(afbeelding);
+      main.appendChild(titel);
+      sectie.appendChild(main);
+      sectie.appendChild(prijs);
+      document.getElementById('uitvoer').appendChild(sectie);
+    });
 
 
   }
 }
 
-document.getElementById('kenmerk').addEventListener('change', (e) =>{
+document.getElementById('kenmerk').addEventListener('change', (e) => {
   sorteerBoekObj.kenmerk = e.target.value;
   sorteerBoekObj.sorteren();
 });
-document.getElementsByName('oplopend').forEach((item) =>{
-item.addEventListener('click', (e)=> {
-sorteerBoekObj.oplopend = parseInt(e.target.value);
-sorteerBoekObj.sorteren();
-})
+document.getElementsByName('oplopend').forEach((item) => {
+  item.addEventListener('click', (e) => {
+    sorteerBoekObj.oplopend = parseInt(e.target.value);
+    sorteerBoekObj.sorteren();
+  })
 })

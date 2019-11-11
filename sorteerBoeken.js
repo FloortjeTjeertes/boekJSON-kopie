@@ -18,6 +18,8 @@ xmlhttp.onreadystatechange = function() {
 
     sorteerBoekObj.data.forEach(boek => {
       boek.titelUpper = boek.titel.toUpperCase();
+      boek.sortAuteur = boek.auteur[0];
+
     });
     sorteerBoekObj.sorteren();
   }
@@ -166,12 +168,26 @@ let sorteerBoekObj = {
       titel.className = 'boekSelectie__titel';
       titel.textContent = keerTekstOm(boek.titel);
 
+      let auteurs = document.createElement('p');
+      auteurs.className = 'boekSelectie__auteurs';
+      boek.auteur[0] = keerTekstOm(boek.auteur[0]);
+      auteurs.textContent = keerTekstOm(boek.auteur);
+
+let overig = document.createElement('p');
+overig.className = 'boekselectie__cover';
+overig.textContent = 'datum: '+boek.uitgave+'| aantal paginas'+boek.paginas+'| taal'+boek.taal+'| ean '+boek.ean;
+
+
+
+
       let prijs = document.createElement('div');
       prijs.className = 'boekSelectie__prijs';
-      prijs.textContent = '€ ' + boek.prijs;
+      prijs.textContent = boek.prijs.toLocaleString('nl-NL', {currency:'EUR',style:'currency'});
 
       sectie.appendChild(afbeelding);
       main.appendChild(titel);
+      main.appendChild(auteurs);
+      main.appendChild(overig);
       sectie.appendChild(main);
       sectie.appendChild(prijs);
       document.getElementById('uitvoer').appendChild(sectie);

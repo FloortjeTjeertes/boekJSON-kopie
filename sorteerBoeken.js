@@ -1,12 +1,3 @@
-document.getElementById('kenmerk').addEventListener('change', (e) => {
-  sorteerBoekObj.kenmerk = e.target.value;
-  sorteerBoekObj.sorteren();
-});
-
-
-
-
-
 
 let xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {

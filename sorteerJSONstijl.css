@@ -14,6 +14,11 @@ body{
   background-color: #f00;
   display: inline-block;
   color:#fff;
+  top: -.5em;
+  right: -.9em;
+  line-height: .5em;
+  paddin: .5em;
+  border-radius: 50% ;
 }
 
 .boekselectie__cover{

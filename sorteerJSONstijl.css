@@ -100,8 +100,7 @@ background-color: #eee;
 .boekSelectie:nth-child(even){
   background-color: inherit;
 }
-.boekSelectie:nth-child(3n+1),
-.boekSelectie:nth-child(3n+6){
+.boekSelectie:nth-child(odd){
 background-color: #eee;
 }
 }

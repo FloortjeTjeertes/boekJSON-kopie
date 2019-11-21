@@ -114,7 +114,13 @@ const keerTekstOm = (string) => {
   return string;
 }
 
-
+let winkelwagen = {
+  items: [],
+  toevoegen: function(el){
+    this.items.push(el);
+    document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
+  }
+}
 
 
 
@@ -175,11 +181,21 @@ overig.textContent = 'datum: '+boek.uitgave+'| aantal paginas'+boek.paginas+'| t
       prijs.className = 'boekSelectie__prijs';
       prijs.textContent = boek.prijs.toLocaleString('nl-NL', {currency:'EUR',style:'currency'});
 
+
+let knop = document.createElement('button');
+knop.className = 'boekSelectie__knop';
+knop.innerHTML = 'voeg toe aan<br>winkelwagen';
+knop.addEventListener('click',() => {
+  winkelwagen.toevoegen(boek);
+})
+
+
       sectie.appendChild(afbeelding);
       main.appendChild(titel);
       main.appendChild(auteurs);
       main.appendChild(overig);
       sectie.appendChild(main);
+      prijs.appendChild(knop);
       sectie.appendChild(prijs);
       document.getElementById('uitvoer').appendChild(sectie);
     });

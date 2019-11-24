@@ -1,4 +1,3 @@
-
 let xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
@@ -116,14 +115,27 @@ const keerTekstOm = (string) => {
 
 let winkelwagen = {
   items: [],
-  toevoegen: function(el){
+  haalItemsOp: function() {
+    let bestelling;
+      if (localStorage.getItem('bestelBoeken') == null) {
+        bestelling = [];
+      }
+    else {
+      bestelling = JSON.parse(localStorage.getItem('bestelBoeken'));
+      document.querySelector('.winkelwagen__aantal').innerHTML = bestelling.length;
+    }
+   return bestelling;
+  },
+
+  toevoegen: function(el) {
+    this.items = this.haalItemsOp();
     this.items.push(el);
+    localStorage.setItem('bestelBoeken', JSON.stringify(this.items));
     document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
   }
 }
 
-
-
+winkelwagen.haalItemsOp();
 
 
 
@@ -147,7 +159,7 @@ let sorteerBoekObj = {
   },
   uitvoeren: function(data) {
     document.getElementById('uitvoer').innerHTML = "";
-    data.forEach( boek => {
+    data.forEach(boek => {
       let sectie = document.createElement('section');
       sectie.className = 'boekSelectie';
 
@@ -169,24 +181,27 @@ let sorteerBoekObj = {
       boek.auteur[0] = keerTekstOm(boek.auteur[0]);
       auteurs.textContent = keerTekstOm(boek.auteur);
 
-let overig = document.createElement('p');
-overig.className = 'boekselectie__cover';
-overig.textContent = 'datum: '+boek.uitgave+'| aantal paginas'+boek.paginas+'| taal'+boek.taal+'| ean '+boek.ean;
+      let overig = document.createElement('p');
+      overig.className = 'boekselectie__cover';
+      overig.textContent = 'datum: ' + boek.uitgave + '| aantal paginas' + boek.paginas + '| taal' + boek.taal + '| ean ' + boek.ean;
 
 
 
 
       let prijs = document.createElement('div');
       prijs.className = 'boekSelectie__prijs';
-      prijs.textContent = boek.prijs.toLocaleString('nl-NL', {currency:'EUR',style:'currency'});
+      prijs.textContent = boek.prijs.toLocaleString('nl-NL', {
+        currency: 'EUR',
+        style: 'currency'
+      });
 
 
-let knop = document.createElement('button');
-knop.className = 'boekSelectie__knop';
-knop.innerHTML = 'voeg toe aan<br>winkelwagen';
-knop.addEventListener('click',() => {
-  winkelwagen.toevoegen(boek);
-})
+      let knop = document.createElement('button');
+      knop.className = 'boekSelectie__knop';
+      knop.innerHTML = 'voeg toe aan<br>winkelwagen';
+      knop.addEventListener('click', () => {
+        winkelwagen.toevoegen(boek);
+      })
 
 
       sectie.appendChild(afbeelding);

@@ -12,7 +12,7 @@ body {
   position: relative;
 }
 
-.winkelwagen__aantal(:empty) {
+.winkelwagen__aantal:not(:empty){
   background-color: #f00;
   display: inline-block;
   color: #fff;

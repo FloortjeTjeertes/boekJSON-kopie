@@ -147,8 +147,7 @@ let sorteerBoekObj = {
   },
   uitvoeren: function(data) {
     document.getElementById('uitvoer').innerHTML = "";
-
-    data.forEach(boek => {
+    data.forEach( boek => {
       let sectie = document.createElement('section');
       sectie.className = 'boekSelectie';
 

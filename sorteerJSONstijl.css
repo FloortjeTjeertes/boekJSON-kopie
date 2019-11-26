@@ -10,6 +10,7 @@ body {
   float: right;
   margin-right: 3em;
   position: relative;
+
 }
 
 .winkelwagen__aantal:not(:empty){
@@ -110,6 +111,51 @@ body {
   }
 }
 
+@media screen and (min-width:68em) {
+  #uitvoer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 2em;
+  }
+
+  .boekSelectie:nth-child(even) {
+    background-color: inherit;
+  }
+
+  .boekSelectie:nth-child(odd) {
+    background-color: #eee;
+  }
+}
+
+/* bestel pagina*/
+.besteldBoek{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-gap:2em;
+  max-resolution: .5em;
+}
+
+
+.besteldBoek__cover{
+  max-width: 50px;
+}
+.besteldBoek__titel{
+  font-weight: normal;
+  font-size:1em;
+}
+
+.besteldBoek__verwijder{
+  width:2em;
+  height:2em;
+  background-image: url(afb/vuilnisemmer.png);
+  background-size: cover;
+  border-radius: .3em;
+  background-color:transparent;
+  transition:background-color 1s ease-out;
+}
+.besteldBoek__verwijder:hover{
+  background-color: #f66;
+}
 @media screen and (min-width:68em) {
   #uitvoer {
     display: grid;

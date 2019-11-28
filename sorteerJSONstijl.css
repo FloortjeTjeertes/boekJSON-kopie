@@ -138,6 +138,7 @@ body {
 
 .besteldBoek__cover{
   max-width: 50px;
+  margin:5px;
 }
 .besteldBoek__titel{
   font-weight: normal;
@@ -156,6 +157,16 @@ body {
 .besteldBoek__verwijder:hover{
   background-color: #f66;
 }
+@media screen and (min-width: 40em){
+  .besteldBoek{
+    max-width: 40em;
+    margin:0 auto;
+  }
+}
+
+
+
+
 @media screen and (min-width:68em) {
   #uitvoer {
     display: grid;

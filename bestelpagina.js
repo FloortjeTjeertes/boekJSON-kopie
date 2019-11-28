@@ -70,12 +70,22 @@ this.items.push(item);
     return bestelling;
   },
 
+verwijderItem: function(ean){
+ this.items.forEach((item,index) => {
+   if(item.ean == ean){
+     this.items.splice(index,1)
+   }
+ })
+ localStorage.setItem('bestelBoeken', JSON.stringify(this.items));
+ if(this.items.lenght>0){
+   document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
 
-toevoegen:function(el){
-this.items = this.haalItemsOp();
-this.items.push(el);
-localStorage.setItem('bestelBoeken', JSON.stringify(this.items));
-document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
+ }
+ else {
+   document.querySelector('.winkelwagen__aantal').innerHTML = "";
+
+ }
+ this.uitvoeren();
 },
 
 
@@ -111,7 +121,9 @@ document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
 
       let verwijder = document.createElement('div');
       verwijder.className= ' besteldBoek__verwijder';
-
+      verwijder.addEventListener('click',()=>{
+        this.verwijderItem(boek.ean);
+      })
 
       sectie.appendChild(afbeelding);
       main.appendChild(titel);

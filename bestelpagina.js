@@ -101,12 +101,6 @@ document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
 
 
 
-      let overig = document.createElement('p');
-      overig.className = 'besteldBoek__cover';
-      overig.textContent = 'datum: ' + boek.uitgave + '| aantal paginas' + boek.paginas + '| taal' + boek.taal + '| ean ' + boek.ean;
-
-
-
 
       let prijs = document.createElement('div');
       prijs.className = 'besteldBoek__prijs';
@@ -121,7 +115,6 @@ document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
 
       sectie.appendChild(afbeelding);
       main.appendChild(titel);
-      main.appendChild(overig);
       sectie.appendChild(main);
       sectie.appendChild(prijs);
       sectie.appendChild(verwijder);

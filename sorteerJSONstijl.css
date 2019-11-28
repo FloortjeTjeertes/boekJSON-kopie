@@ -130,7 +130,7 @@ body {
 /* bestel pagina*/
 .besteldBoek{
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
   grid-gap:2em;
   max-resolution: .5em;
 }
